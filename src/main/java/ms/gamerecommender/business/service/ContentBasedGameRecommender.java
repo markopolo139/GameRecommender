@@ -55,11 +55,15 @@ class ContentBasedGameRecommender {
         return Maps.immutableEntry(game, genreScore + tagsScore);
     }
 
+    private boolean checkIfGamePresentInOwnedGames(Game game, List<UserGame> playedGames) {
+        return playedGames.stream().map(Game::getGameId).noneMatch(gameId -> gameId.equals(game.getGameId()));
+    }
+
     List<Game> recommend(List<UserGame> input, List<Game> dataset, int topN) {
         val genresPreferenceMap = getGenrePreferenceMap(input);
         val tagsPreferenceMap = getTagsPreferenceMap(input);
 
-        Map<Game, Double> similarityScores = dataset.stream()
+        Map<Game, Double> similarityScores = dataset.stream().filter((game -> checkIfGamePresentInOwnedGames(game, input)))
                 .map((game) -> calculateScore(game, genresPreferenceMap, tagsPreferenceMap))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 

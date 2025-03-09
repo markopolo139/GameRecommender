@@ -2,6 +2,7 @@ plugins {
     java
     id("org.springframework.boot") version "3.4.3"
     id("io.spring.dependency-management") version "1.1.7"
+    id("io.freefair.lombok") version "8.12.2.1"
 }
 
 group = "ms"
@@ -49,6 +50,7 @@ dependencies {
 
     implementation("org.apache.commons:commons-lang3:3.17.0")
     implementation("org.apache.commons:commons-collections4:4.5.0-M3")
+    testImplementation("org.apache.commons:commons-collections4:4.5.0-M3")
 
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
