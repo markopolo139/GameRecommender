@@ -1,16 +1,14 @@
 package ms.gamerecommender.business.value;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
-import lombok.val;
 
 import javax.sound.sampled.ReverbType;
 
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @Getter
+@EqualsAndHashCode(callSuper = true)
 public class UserGame extends Game {
 
     private static final double RATING_WEIGHT = 0.4;

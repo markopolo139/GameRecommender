@@ -11,6 +11,7 @@ import java.util.Set;
 @EqualsAndHashCode
 @Getter
 public class Game {
+    int gameId;
     String title;
     Set<String> genres;
     Set<String> tags;
