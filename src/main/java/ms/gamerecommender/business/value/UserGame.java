@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.sound.sampled.ReverbType;
+import java.util.Set;
 
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -20,10 +21,11 @@ public class UserGame extends Game {
     double rating;
     Review review;
 
-    public UserGame(double timePlayed, double rating) {
-        this.review = Review.NONE;
+    public UserGame(int gameId, String title, Set<String> genres, Set<String> tags, double timePlayed, double rating) {
+        super(gameId, title, genres, tags);
         this.timePlayed = timePlayed;
         this.rating = rating;
+        this.review = Review.NONE;
     }
 
     @AllArgsConstructor
