@@ -21,11 +21,21 @@ class ValueFactory {
         return new Game(GAME_ID++, StringUtils.randomAlphanumeric(10), genres, tags);
     }
 
-    public UserGame createUserGame(Set<String> genres, Set<String> tags, double timePlayed, double rating, UserGame.Review review) {
-        return new UserGame(GAME_ID++, StringUtils.randomAlphanumeric(10), genres, tags, timePlayed, rating, review);
+    public UserGame createUserGame(int gameId, Set<String> genres, Set<String> tags, double timePlayed, double rating, UserGame.Review review) {
+        return new UserGame(gameId, StringUtils.randomAlphanumeric(10), genres, tags, timePlayed, rating, review);
+    }
+
+    public UserGame createUserGame(Game game, double timePlayed, double rating, UserGame.Review review) {
+        return new UserGame(
+                game.getGameId(), StringUtils.randomAlphanumeric(10), game.getGenres(), game.getTags(), timePlayed, rating, review
+        );
     }
 
     public UserProfile createUserProfile(List<UserGame> ownedGames) {
         return new UserProfile(USER_ID++, ownedGames);
+    }
+
+    public void resetGameId() {
+        GAME_ID = 0;
     }
 }

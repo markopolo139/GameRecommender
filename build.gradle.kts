@@ -50,7 +50,6 @@ dependencies {
 
     implementation("org.apache.commons:commons-lang3:3.17.0")
     implementation("org.apache.commons:commons-collections4:4.5.0-M3")
-    testImplementation("org.apache.commons:commons-collections4:4.5.0-M3")
 
     implementation("org.springframework.boot:spring-boot-starter-log4j2")
 
