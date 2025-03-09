@@ -53,3 +53,7 @@ dependencies {
 tasks.withType<Test> {
     useJUnitPlatform()
 }
+
+configurations.all {
+    exclude(group = "org.springframework.boot", module = "spring-boot-starter-logging")
+}
