@@ -46,7 +46,7 @@ class ContentBasedGameRecommender {
             map.replaceAll((k, v) -> 0.0);
         }
 
-        map.replaceAll((k, v) -> v - minValue / maxValue - minValue);
+        map.replaceAll((k, v) -> (v - minValue) / (maxValue - minValue));
     }
 
     private Map.Entry<Game, Double> calculateScore(Game game, Map<String, Double>  genrePreferenceMap, Map<String, Double> tagsPreferenceMap) {
