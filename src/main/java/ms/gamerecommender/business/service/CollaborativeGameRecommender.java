@@ -21,9 +21,9 @@ import java.util.List;
 @UtilityClass
 class CollaborativeGameRecommender {
     @SneakyThrows
-    List<Game> recommend(int userId, DataModel input, List<Game> dataset, int topN) {
+    List<Game> recommend(int userId, DataModel input, List<Game> dataset, int nearestNeighbors, int topN) {
         UserSimilarity userSimilarity = new PearsonCorrelationSimilarity(input);
-        UserNeighborhood userNeighborhood = new NearestNUserNeighborhood(topN, userSimilarity, input);
+        UserNeighborhood userNeighborhood = new NearestNUserNeighborhood(nearestNeighbors, userSimilarity, input);
         UserBasedRecommender recommender = new GenericUserBasedRecommender(input, userNeighborhood,  userSimilarity);
 
         val gameIds = recommender.recommend(userId, topN).stream().map(RecommendedItem::getItemID).toList();
