@@ -1,24 +1,22 @@
 package ms.gamerecommender.business.service;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.NonFinal;
 import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserProfile;
 import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HybridGameRecommender implements Recommender<UserProfile, Game> {
 
-    @NonFinal
-    @Value("${recommender.data.model.csvPath}")
     String csvPath;
 
     @Override
