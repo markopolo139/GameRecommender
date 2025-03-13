@@ -15,7 +15,7 @@ import java.util.Set;
 @UtilityClass
 class ValueFactory {
     Integer GAME_ID = 0;
-    Integer USER_ID = 0;
+    Integer USER_ID = 1;
 
     public Game createGame(Set<String> genres, Set<String> tags) {
         return new Game(GAME_ID++, StringUtils.randomAlphanumeric(10), genres, tags);
