@@ -13,6 +13,5 @@ import java.util.Set;
 public class Game {
     int gameId;
     String title;
-    Set<String> genres;
     Set<String> tags;
 }

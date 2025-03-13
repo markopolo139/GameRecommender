@@ -16,7 +16,6 @@ import static ms.gamerecommender.business.service.ValueFactory.*;
 class CollaborativeGameRecommenderTest {
 
     private String csvPathForOneUser =  "src/test/resources/dataModelOneUser.csv";
-    private String csvPath =  "src/test/resources/dataModel.csv";
 
     @AfterEach
     void tearDown() {
@@ -26,16 +25,16 @@ class CollaborativeGameRecommenderTest {
     @Test
     void collaborativeUserRecommendationTest() throws IOException {
         val dataset = List.of(
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre3"), Set.of("tag3")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre2"), Set.of("tag2"))
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre3", "tag3")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre2", "tag2"))
         );
 
         val collaborativeRecommendations = CollaborativeGameRecommender.recommend(

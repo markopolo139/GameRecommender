@@ -27,24 +27,24 @@ class HybridGameRecommenderTest {
     @Test
     void generalRecommendationTest() throws IOException {
         val dataset = List.of(
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre3"), Set.of("tag3")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre3"), Set.of("tag1")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre3"), Set.of("tag2")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre1"), Set.of("tag1")),
-                createGame(Set.of("Genre2"), Set.of("tag2")),
-                createGame(Set.of("Genre1"), Set.of("tag2"))
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre3", "tag3")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre3", "tag1")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre3", "tag2")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre1", "tag1")),
+                createGame(Set.of("Genre2", "tag2")),
+                createGame(Set.of("Genre1", "tag2"))
         );
 
         val user = createUserProfile(List.of(

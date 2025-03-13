@@ -3,7 +3,6 @@ package ms.gamerecommender.business.value;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import javax.sound.sampled.ReverbType;
 import java.util.Set;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
@@ -20,15 +19,15 @@ public class UserGame extends Game {
     double rating;
     Review review;
 
-    public UserGame(int gameId, String title, Set<String> genres, Set<String> tags, double timePlayed, double rating) {
-        super(gameId, title, genres, tags);
+    public UserGame(int gameId, String title, Set<String> tags, double timePlayed, double rating) {
+        super(gameId, title, tags);
         this.timePlayed = timePlayed;
         this.rating = rating;
         this.review = Review.NONE;
     }
 
-    public UserGame(int gameId, String title, Set<String> genres, Set<String> tags, double timePlayed, double rating, Review review) {
-        super(gameId, title, genres, tags);
+    public UserGame(int gameId, String title, Set<String> tags, double timePlayed, double rating, Review review) {
+        super(gameId, title, tags);
         this.timePlayed = timePlayed;
         this.rating = rating;
         this.review = review;

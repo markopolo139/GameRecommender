@@ -17,17 +17,17 @@ class ValueFactory {
     Integer GAME_ID = 0;
     Integer USER_ID = 1;
 
-    public Game createGame(Set<String> genres, Set<String> tags) {
-        return new Game(GAME_ID++, StringUtils.randomAlphanumeric(10), genres, tags);
+    public Game createGame(Set<String> tags) {
+        return new Game(GAME_ID++, StringUtils.randomAlphanumeric(10), tags);
     }
 
-    public UserGame createUserGame(int gameId, Set<String> genres, Set<String> tags, double timePlayed, double rating, UserGame.Review review) {
-        return new UserGame(gameId, StringUtils.randomAlphanumeric(10), genres, tags, timePlayed, rating, review);
+    public UserGame createUserGame(int gameId, Set<String> tags, double timePlayed, double rating, UserGame.Review review) {
+        return new UserGame(gameId, StringUtils.randomAlphanumeric(10), tags, timePlayed, rating, review);
     }
 
     public UserGame createUserGame(Game game, double timePlayed, double rating, UserGame.Review review) {
         return new UserGame(
-                game.getGameId(), StringUtils.randomAlphanumeric(10), game.getGenres(), game.getTags(), timePlayed, rating, review
+                game.getGameId(), StringUtils.randomAlphanumeric(10), game.getTags(), timePlayed, rating, review
         );
     }
 
