@@ -17,16 +17,20 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HybridGameRecommender implements Recommender<UserProfile, Game> {
 
+    static double TOP_N_FACTOR = 0.75;
+
     Integer nearestNeighbors;
     String csvPath;
 
     @Override
     @SneakyThrows
     public List<Game> recommend(UserProfile input, List<Game> dataset, int topN) {
+        val howManyRecommend = (int) Math.round(TOP_N_FACTOR * topN);
+
         val collaborativeRecommendations = CollaborativeGameRecommender.recommend(
-                input.userId(), new FileDataModel(new File(csvPath)),dataset, nearestNeighbors, Math.floorDiv(topN, 2)
+                input.userId(), new FileDataModel(new File(csvPath)),dataset, nearestNeighbors, howManyRecommend
         );
-        val contentBasedRecommendations = ContentBasedGameRecommender.recommend(input.ownedGames(), dataset, Math.ceilDiv(topN, 2));
+        val contentBasedRecommendations = ContentBasedGameRecommender.recommend(input.ownedGames(), dataset, howManyRecommend);
 
         val result = new LinkedHashSet<Game>();
         result.addAll(collaborativeRecommendations);
