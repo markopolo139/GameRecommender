@@ -25,16 +25,16 @@ class CollaborativeGameRecommenderTest {
     @Test
     void collaborativeUserRecommendationTest() throws IOException {
         val dataset = List.of(
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre3", "tag3")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre2", "tag2"))
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre3", "tag3"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100)
         );
 
         val collaborativeRecommendations = CollaborativeGameRecommender.recommend(

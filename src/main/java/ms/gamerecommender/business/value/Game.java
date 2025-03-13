@@ -14,4 +14,5 @@ public class Game {
     int gameId;
     String title;
     Set<String> tags;
+    double positiveReviewPercentage;
 }

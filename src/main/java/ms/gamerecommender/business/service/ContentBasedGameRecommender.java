@@ -1,6 +1,8 @@
 package ms.gamerecommender.business.service;
 
 import com.google.common.collect.Maps;
+import lombok.AccessLevel;
+import lombok.experimental.FieldDefaults;
 import lombok.experimental.UtilityClass;
 import lombok.val;
 import ms.gamerecommender.business.value.Game;
@@ -10,7 +12,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @UtilityClass
+@FieldDefaults(level = AccessLevel.PRIVATE,  makeFinal = true)
 class ContentBasedGameRecommender {
+
+    double positiveReviewPercentageCutOff = 80;
 
     private Map<String, Double> getTagsPreferenceMap(List<UserGame> playedGames) {
         Map<String, Double> tagsPreferenceMap = Maps.newHashMap();
@@ -53,6 +58,7 @@ class ContentBasedGameRecommender {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         return similarityScores.entrySet().stream()
+                .filter(entry -> entry.getKey().getPositiveReviewPercentage() >= positiveReviewPercentageCutOff)
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(topN)
                 .map(Map.Entry::getKey)

@@ -22,11 +22,11 @@ class ContentBasedGameRecommenderTest {
     @Test
     void userPlayedAllGames() {
         val dataset = List.of(
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre2")),
-                createGame(Set.of("Genre2")),
-                createGame(Set.of("Genre3"))
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre3"), 100)
         );
 
         val userGames = List.of(
@@ -44,18 +44,18 @@ class ContentBasedGameRecommenderTest {
     @Test
     void recommendationByOneGenreTest() {
         val dataset = List.of(
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre2")),
-                createGame(Set.of("Genre2")),
-                createGame(Set.of("Genre3")),
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre1")),
-                createGame(Set.of("Genre2")),
-                createGame(Set.of("Genre2")),
-                createGame(Set.of("Genre3")),
-                createGame(Set.of("Genre3"))
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre3"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre3"), 100),
+                createGame(Set.of("Genre3"), 100)
         );
 
         val userGames = List.of(
@@ -76,18 +76,18 @@ class ContentBasedGameRecommenderTest {
     @Test
     void recommendationByOneTagTest() {
         val dataset = List.of(
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag3")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag3")),
-                createGame(Set.of("tag3"))
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag3"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag3"), 100),
+                createGame(Set.of("tag3"), 100)
         );
 
         val userGames = List.of(
@@ -108,18 +108,18 @@ class ContentBasedGameRecommenderTest {
     @Test
     void recommendationByMultiplyTagTest() {
         val dataset = List.of(
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag3")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag1")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag2")),
-                createGame(Set.of("tag3")),
-                createGame(Set.of("tag3"))
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag3"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag1"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag2"), 100),
+                createGame(Set.of("tag3"), 100),
+                createGame(Set.of("tag3"), 100)
         );
 
         val userGames = List.of(
@@ -140,18 +140,18 @@ class ContentBasedGameRecommenderTest {
     @Test
     void recommendationTest() {
         val dataset = List.of(
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre3", "tag3")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre1", "tag1")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre2", "tag2")),
-                createGame(Set.of("Genre3", "tag3")),
-                createGame(Set.of("Genre3", "tag3"))
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre3", "tag3"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre1", "tag1"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre2", "tag2"), 100),
+                createGame(Set.of("Genre3", "tag3"), 100),
+                createGame(Set.of("Genre3", "tag3"), 100)
         );
 
         val userGames = List.of(
@@ -169,4 +169,32 @@ class ContentBasedGameRecommenderTest {
         Assertions.assertTrue(CollectionUtils.isEqualCollection(dataset.subList(5, 10), top5));
     }
 
+    @Test
+    void cutOffTooLowPositivePercentGames() {
+        val dataset = List.of(
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre2"), 100),
+                createGame(Set.of("Genre3"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 100),
+                createGame(Set.of("Genre1"), 75),
+                createGame(Set.of("Genre2"), 100)
+        );
+
+        val userGames = List.of(
+                createUserGame(dataset.getFirst(), 500, 5, UserGame.Review.POSITIVE),
+                createUserGame(dataset.get(1), 250, 5, UserGame.Review.POSITIVE),
+                createUserGame(dataset.get(2), 100, 4, UserGame.Review.NONE),
+                createUserGame(dataset.get(3), 30, 3, UserGame.Review.NONE),
+                createUserGame(dataset.get(4), 1, 1, UserGame.Review.NEGATIVE)
+        );
+
+        val top3 = ContentBasedGameRecommender.recommend(userGames, dataset, 3);
+
+        Assertions.assertTrue(CollectionUtils.isEqualCollection(List.of(
+                dataset.get(5), dataset.get(6), dataset.get(8)
+        ), top3));
+    }
 }
