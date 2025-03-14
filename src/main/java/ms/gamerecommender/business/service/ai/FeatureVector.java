@@ -3,6 +3,7 @@ package ms.gamerecommender.business.service.ai;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
+import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserGame;
 
@@ -55,8 +56,9 @@ public class FeatureVector {
     private float[] encodeTags(Set<String> tags) {
         float[] encoding = new float[AVAILABLE_TAGS.size()];
 
-        for (int i = 0; i < AVAILABLE_TAGS.size(); i++) {
-            encoding[i] = tags.contains(AVAILABLE_TAGS.get(i)) ? 1.0f : 0.0f;
+        for (String tag: tags) {
+            val index = AVAILABLE_TAGS.indexOf(tag);
+            encoding[index] = 1.0f;
         }
 
         return encoding;
