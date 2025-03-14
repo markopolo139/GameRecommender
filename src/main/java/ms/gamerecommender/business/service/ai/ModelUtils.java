@@ -23,6 +23,8 @@ import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserProfile;
 
+import java.util.List;
+
 import static ms.gamerecommender.business.service.ai.DeepLearningUtilities.*;
 
 @UtilityClass
@@ -60,6 +62,15 @@ public class ModelUtils {
         }
     }
 
+    private List<Float> batchPredict(Model model, List<FeatureVector> inputFeatures) {
+        val inputArrays = inputFeatures.stream().map(FeatureVector::getFeatureArray).toList();
+        try (Predictor<float[], Float> predictor = model.newPredictor(new FeatureTranslator())) {
+            return predictor.batchPredict(inputArrays);
+        } catch (TranslateException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public float trainAndPredict(UserProfile user, Game newGame, int numberOfEpochs) {
         val dataset = createModelDatasetForUser(user);
         val newGameVector = transformToFeatureVector(newGame);
@@ -70,6 +81,19 @@ public class ModelUtils {
             modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
 
             return predict(model, newGameVector);
+        }
+    }
+
+    public List<Float> trainAndBatchPredict(UserProfile user, List<Game> newGames, int numberOfEpochs) {
+        val dataset = createModelDatasetForUser(user);
+        val newGameVector = transformToFeatureVectorList(newGames);
+
+        try (val model = Model.newInstance("game-recommender")) {
+            model.setBlock(ModelUtils.firstModel(FeatureVector.VECTOR_SIZE));
+
+            modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
+
+            return batchPredict(model, newGameVector);
         }
     }
 

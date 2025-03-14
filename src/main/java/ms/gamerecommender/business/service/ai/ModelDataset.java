@@ -3,7 +3,7 @@ package ms.gamerecommender.business.service.ai;
 import ai.djl.ndarray.NDArray;
 import ai.djl.ndarray.NDList;
 import ai.djl.ndarray.NDManager;
-import ai.djl.training.dataset.RandomAccessDataset;
+import ai.djl.training.dataset.*;
 import ai.djl.training.dataset.Record;
 import ai.djl.translate.TranslateException;
 import ai.djl.util.Progress;
@@ -18,8 +18,22 @@ public class ModelDataset extends RandomAccessDataset {
     List<FeatureVector> features;
 
     public ModelDataset(List<FeatureVector> features) {
-        super(new Builder());
+        super(defaultBuilder());
         this.features = features;
+    }
+
+    public ModelDataset(Builder builder, List<FeatureVector> features) {
+        super(builder);
+        this.features = features;
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    private static Builder defaultBuilder() {
+        return new Builder()
+                .setSampling(new BatchSampler(new RandomSampler(), 16));
     }
 
     @Override

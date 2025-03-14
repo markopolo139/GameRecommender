@@ -19,4 +19,8 @@ public class DeepLearningUtilities {
     public FeatureVector transformToFeatureVector(Game game) {
         return new FeatureVector(game);
     }
+
+    public List<FeatureVector> transformToFeatureVectorList(List<Game> games) {
+        return games.stream().map(DeepLearningUtilities::transformToFeatureVector).toList();
+    }
 }
