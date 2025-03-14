@@ -8,16 +8,19 @@ import ai.djl.training.dataset.Record;
 import ai.djl.translate.TranslateException;
 import ai.djl.util.Progress;
 import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
 import java.io.IOException;
 import java.util.List;
 
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ModelDataset extends RandomAccessDataset {
     List<FeatureVector> features;
+
+    public ModelDataset(List<FeatureVector> features) {
+        super(new Builder());
+        this.features = features;
+    }
 
     @Override
     public Record get(NDManager manager, long index) throws IOException {
@@ -38,4 +41,11 @@ public class ModelDataset extends RandomAccessDataset {
 
     @Override
     public void prepare(Progress progress) throws IOException, TranslateException {}
+
+    public static class Builder extends RandomAccessDataset.BaseBuilder<Builder> {
+        @Override
+        protected Builder self() {
+            return this;
+        }
+    }
 }
