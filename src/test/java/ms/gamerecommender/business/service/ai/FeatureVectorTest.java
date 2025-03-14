@@ -12,7 +12,7 @@ class FeatureVectorTest {
     @Test
     void featureTransformTest() {
         val dataset = createDataset(1,1);
-        val user = createUserProfile(1,dataset,1);
+        val user = createUserProfile(1, dataset,1);
 
         val featureVector = transformToFeatureVector(user.ownedGames().getFirst());
         val expectedArray = new float[FeatureVector.VECTOR_SIZE];

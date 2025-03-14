@@ -22,7 +22,7 @@ public class SyntheticDataGenerator {
             "Cards", "Roguelike", "Dungeon crawler", "Music", "Visual Novel", "Story", "Adventure", "Open World"
     );
 
-    private Game createGame(int id, Set<String> tags, double positivePercent) {
+    public Game createGame(int id, Set<String> tags, double positivePercent) {
         return new Game(id, StringUtils.randomAlphanumeric(10), tags, positivePercent);
     }
 
