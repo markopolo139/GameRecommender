@@ -42,13 +42,16 @@ public class ModelUtils {
 
     @SneakyThrows
     private void modelTraining(Model model, ModelDataset dataset, int inputSize, int numberOfEpochs) {
+        val datasetSeparated = dataset.randomSplit(8, 2);
+
         val config = new DefaultTrainingConfig(Loss.l2Loss())
                 .optOptimizer(Optimizer.adam().build())
-                .addTrainingListeners(TrainingListener.Defaults.logging());
+                .addTrainingListeners(TrainingListener.Defaults.logging())
+                .addTrainingListeners(new LossLogger());
 
         try (Trainer trainer = model.newTrainer(config)) {
             trainer.initialize(new Shape(1, inputSize));
-            EasyTrain.fit(trainer, numberOfEpochs, dataset, null);
+            EasyTrain.fit(trainer, numberOfEpochs, datasetSeparated[0], datasetSeparated[1]);
         } catch (TranslateException e) {
             throw new RuntimeException(e);
         }
