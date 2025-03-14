@@ -23,8 +23,7 @@ import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserProfile;
 
-import static ms.gamerecommender.business.service.ai.DeepLearningUtilities.createModelDatasetForUser;
-import static ms.gamerecommender.business.service.ai.DeepLearningUtilities.transformToFeatureVector;
+import static ms.gamerecommender.business.service.ai.DeepLearningUtilities.*;
 
 @UtilityClass
 public class ModelUtils {
