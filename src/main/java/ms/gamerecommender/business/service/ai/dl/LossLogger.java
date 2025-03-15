@@ -11,8 +11,10 @@ public class LossLogger implements TrainingListener {
 
     @Override
     public void onEpoch(Trainer trainer) {
-        // Log loss at the end of each epoch
-        System.out.printf("Train Loss: %s, Validation Loss: %s \n", trainer.getTrainingResult().getTrainLoss(), trainer.getTrainingResult().getValidateLoss());
+        System.out.printf(
+                "Train Loss: %s, Validation Loss: %s \n",
+                trainer.getTrainingResult().getTrainLoss(), trainer.getTrainingResult().getValidateLoss()
+        );
     }
 
     @Override

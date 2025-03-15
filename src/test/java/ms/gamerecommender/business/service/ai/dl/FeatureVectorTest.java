@@ -4,7 +4,7 @@ import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static ms.gamerecommender.business.service.ai.dl.DeepLearningUtilities.*;
+import static ms.gamerecommender.business.service.ai.dl.ModelUtils.*;
 import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.*;
 
 class FeatureVectorTest {
