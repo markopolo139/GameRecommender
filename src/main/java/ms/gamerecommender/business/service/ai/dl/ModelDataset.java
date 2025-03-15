@@ -1,4 +1,4 @@
-package ms.gamerecommender.business.service.ai;
+package ms.gamerecommender.business.service.ai.dl;
 
 import ai.djl.ndarray.NDArray;
 import ai.djl.ndarray.NDList;

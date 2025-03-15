@@ -1,10 +1,10 @@
-package ms.gamerecommender.business.service.ai;
+package ms.gamerecommender.business.service.ai.dl;
 
 import lombok.val;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static ms.gamerecommender.business.service.ai.DeepLearningUtilities.*;
+import static ms.gamerecommender.business.service.ai.dl.DeepLearningUtilities.*;
 import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.*;
 
 class FeatureVectorTest {

@@ -1,4 +1,4 @@
-package ms.gamerecommender.business.service.ai;
+package ms.gamerecommender.business.service.ai.dl;
 
 import lombok.AccessLevel;
 import lombok.Getter;

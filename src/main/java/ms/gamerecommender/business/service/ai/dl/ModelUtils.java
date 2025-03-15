@@ -1,4 +1,4 @@
-package ms.gamerecommender.business.service.ai;
+package ms.gamerecommender.business.service.ai.dl;
 
 import ai.djl.Model;
 import ai.djl.inference.Predictor;
@@ -25,7 +25,7 @@ import ms.gamerecommender.business.value.UserProfile;
 
 import java.util.List;
 
-import static ms.gamerecommender.business.service.ai.DeepLearningUtilities.*;
+import static ms.gamerecommender.business.service.ai.dl.DeepLearningUtilities.*;
 
 @UtilityClass
 public class ModelUtils {
