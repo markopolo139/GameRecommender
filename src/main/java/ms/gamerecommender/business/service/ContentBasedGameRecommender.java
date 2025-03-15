@@ -8,8 +8,12 @@ import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserGame;
 
-import java.util.*;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
+
+import static ms.gamerecommender.business.DatasetUtility.*;
 
 @UtilityClass
 @FieldDefaults(level = AccessLevel.PRIVATE,  makeFinal = true)
@@ -46,14 +50,10 @@ class ContentBasedGameRecommender {
         return Maps.immutableEntry(game, tagsScore);
     }
 
-    private boolean checkIfGamePresentInOwnedGames(Game game, List<UserGame> playedGames) {
-        return playedGames.stream().map(Game::getGameId).noneMatch(gameId -> gameId.equals(game.getGameId()));
-    }
-
     List<Game> recommend(List<UserGame> input, List<Game> dataset, int topN) {
         val tagsPreferenceMap = getTagsPreferenceMap(input);
 
-        Map<Game, Double> similarityScores = dataset.stream().filter((game -> checkIfGamePresentInOwnedGames(game, input)))
+        Map<Game, Double> similarityScores = removeOwnedGamesFromDatabase(dataset, input).stream()
                 .map((game) -> calculateScore(game, tagsPreferenceMap))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 

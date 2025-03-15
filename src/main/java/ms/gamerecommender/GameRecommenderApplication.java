@@ -4,8 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //TODO:
-// Do AI models neural collaborative
 // Interface for AI models with function trainAndPredict (also with batch predict)
+// Do AI models neural collaborative
 // AI_Recommender which will just use AI via recommender interface, remeber to connect prediction with games (via map f.e.)
 // Play around with steam api using insomnia
 // IStoreServicce has app details and tag list, docs: https://steamapi.xpaw.me/#IStoreService/GetTagList
