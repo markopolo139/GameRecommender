@@ -2,6 +2,7 @@ package ms.gamerecommender.business.service.ai.dl;
 
 import ai.djl.Model;
 import ai.djl.ndarray.NDList;
+import ai.djl.ndarray.types.Shape;
 import ai.djl.nn.Activation;
 import ai.djl.nn.Blocks;
 import ai.djl.nn.SequentialBlock;
@@ -39,7 +40,7 @@ public class DlModelUtils {
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(DlModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
-            modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
+            modelTraining(model, dataset, new Shape(1, FeatureVector.VECTOR_SIZE), numberOfEpochs);
 
             val predictor = model.newPredictor(new FeatureTranslator());
 
@@ -55,7 +56,7 @@ public class DlModelUtils {
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(DlModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
-            modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
+            modelTraining(model, dataset, new Shape(1, FeatureVector.VECTOR_SIZE), numberOfEpochs);
 
             val predictor = model.newPredictor(new FeatureTranslator());
 

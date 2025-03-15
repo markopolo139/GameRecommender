@@ -20,7 +20,7 @@ import lombok.val;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ModelUtils {
     @SneakyThrows
-    public <D extends RandomAccessDataset> void modelTraining(Model model, D dataset, int inputSize, int numberOfEpochs) {
+    public <D extends RandomAccessDataset> void modelTraining(Model model, D dataset, Shape inputShape, int numberOfEpochs) {
         val datasetSeparated = dataset.randomSplit(8, 2);
 
         val config = new DefaultTrainingConfig(Loss.l2Loss())
@@ -29,7 +29,7 @@ public class ModelUtils {
                 .addTrainingListeners(new LossLogger());
 
         try (Trainer trainer = model.newTrainer(config)) {
-            trainer.initialize(new Shape(1, inputSize));
+            trainer.initialize(inputShape);
             EasyTrain.fit(trainer, numberOfEpochs, datasetSeparated[0], datasetSeparated[1]);
         } catch (TranslateException e) {
             throw new RuntimeException(e);
