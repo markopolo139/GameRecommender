@@ -17,9 +17,9 @@ import java.util.List;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class ModelDataset extends RandomAccessDataset {
-    List<NCFDataPoint> dataPoints;
+    List<NcfDataPoint> dataPoints;
 
-    public ModelDataset(List<NCFDataPoint> dataPoints) {
+    public ModelDataset(List<NcfDataPoint> dataPoints) {
         super(new Builder().setSampling(new BatchSampler(new RandomSampler(), 16)));
         this.dataPoints = dataPoints;
     }
