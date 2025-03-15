@@ -27,7 +27,7 @@ import ms.gamerecommender.business.value.UserProfile;
 import java.util.List;
 
 @UtilityClass
-public class ModelUtils {
+public class DlModelUtils {
     private SequentialBlock simpleDlModel(int inputSize) {
         val block = new SequentialBlock();
         block.add(Blocks.batchFlattenBlock(inputSize));
@@ -78,7 +78,7 @@ public class ModelUtils {
         val newGameVector = transformToFeatureVector(newGame);
 
         try (val model = Model.newInstance("game-recommender")) {
-            model.setBlock(ModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
+            model.setBlock(DlModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
             modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
 
@@ -91,7 +91,7 @@ public class ModelUtils {
         val newGameVector = transformToFeatureVectorList(newGames);
 
         try (val model = Model.newInstance("game-recommender")) {
-            model.setBlock(ModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
+            model.setBlock(DlModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
             modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
 
@@ -112,7 +112,7 @@ public class ModelUtils {
     }
 
     public List<FeatureVector> transformToFeatureVectorList(List<Game> games) {
-        return games.stream().map(ModelUtils::transformToFeatureVector).toList();
+        return games.stream().map(DlModelUtils::transformToFeatureVector).toList();
     }
 
     private class FeatureTranslator implements Translator<float[], Float> {

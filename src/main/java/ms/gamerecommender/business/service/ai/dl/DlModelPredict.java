@@ -9,7 +9,7 @@ import ms.gamerecommender.business.value.UserProfile;
 
 import java.util.List;
 
-import static ms.gamerecommender.business.service.ai.dl.ModelUtils.*;
+import static ms.gamerecommender.business.service.ai.dl.DlModelUtils.*;
 
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
