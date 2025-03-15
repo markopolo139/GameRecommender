@@ -55,6 +55,8 @@ dependencies {
 
     implementation("ai.djl:api:0.32.0")
     implementation("ai.djl.pytorch:pytorch-engine:0.32.0")
+
+    implementation("org.apache.commons:commons-csv:1.13.0")
 }
 
 tasks.withType<Test> {
