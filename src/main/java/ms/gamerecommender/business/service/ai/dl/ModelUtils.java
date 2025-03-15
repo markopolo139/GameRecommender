@@ -20,6 +20,7 @@ import ai.djl.translate.TranslatorContext;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import lombok.val;
+import ms.gamerecommender.business.service.ai.LossLogger;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserProfile;
 

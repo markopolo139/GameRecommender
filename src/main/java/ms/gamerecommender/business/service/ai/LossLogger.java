@@ -1,4 +1,4 @@
-package ms.gamerecommender.business.service.ai.dl;
+package ms.gamerecommender.business.service.ai;
 
 import ai.djl.training.Trainer;
 import ai.djl.training.listener.TrainingListener;
