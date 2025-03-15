@@ -28,7 +28,7 @@ import java.util.List;
 
 @UtilityClass
 public class ModelUtils {
-    private SequentialBlock firstModel(int inputSize) {
+    private SequentialBlock simpleDlModel(int inputSize) {
         val block = new SequentialBlock();
         block.add(Blocks.batchFlattenBlock(inputSize));
         block.add(Linear.builder().setUnits(128).build());
@@ -78,7 +78,7 @@ public class ModelUtils {
         val newGameVector = transformToFeatureVector(newGame);
 
         try (val model = Model.newInstance("game-recommender")) {
-            model.setBlock(ModelUtils.firstModel(FeatureVector.VECTOR_SIZE));
+            model.setBlock(ModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
             modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
 
@@ -91,7 +91,7 @@ public class ModelUtils {
         val newGameVector = transformToFeatureVectorList(newGames);
 
         try (val model = Model.newInstance("game-recommender")) {
-            model.setBlock(ModelUtils.firstModel(FeatureVector.VECTOR_SIZE));
+            model.setBlock(ModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
             modelTraining(model, dataset, FeatureVector.VECTOR_SIZE, numberOfEpochs);
 
