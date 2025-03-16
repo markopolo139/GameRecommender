@@ -40,7 +40,7 @@ public class DlModelUtils {
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(DlModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
-            modelTraining(model, dataset, new Shape(1, FeatureVector.VECTOR_SIZE), numberOfEpochs);
+            modelTraining(model, dataset, new Shape(FeatureVector.VECTOR_SIZE), numberOfEpochs);
 
             val predictor = model.newPredictor(new FeatureTranslator());
 
@@ -56,7 +56,7 @@ public class DlModelUtils {
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(DlModelUtils.simpleDlModel(FeatureVector.VECTOR_SIZE));
 
-            modelTraining(model, dataset, new Shape(1, FeatureVector.VECTOR_SIZE), numberOfEpochs);
+            modelTraining(model, dataset, new Shape(FeatureVector.VECTOR_SIZE), numberOfEpochs);
 
             val predictor = model.newPredictor(new FeatureTranslator());
 
