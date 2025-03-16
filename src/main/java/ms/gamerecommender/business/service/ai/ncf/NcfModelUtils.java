@@ -25,7 +25,7 @@ import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
-import static ms.gamerecommender.business.service.ai.ModelUtils.modelTraining;
+import static ms.gamerecommender.business.service.ai.ModelUtils.*;
 
 @UtilityClass
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)

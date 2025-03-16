@@ -4,9 +4,8 @@ import lombok.val;
 import ms.gamerecommender.business.value.UserGame;
 import org.junit.jupiter.api.Test;
 
-import static ms.gamerecommender.business.service.ai.dl.DlModelUtils.trainAndBatchPredict;
-import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.createDataset;
-import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.createUserProfile;
+import static ms.gamerecommender.business.service.ai.dl.DlModelUtils.*;
+import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.*;
 
 class DlModelUtilsTest {
 

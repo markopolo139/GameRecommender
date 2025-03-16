@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
-import static ms.gamerecommender.business.DatasetUtility.removeOwnedGamesFromDatabase;
+import static ms.gamerecommender.business.DatasetUtility.*;
 
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)

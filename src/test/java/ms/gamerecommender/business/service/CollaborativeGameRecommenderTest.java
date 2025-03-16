@@ -15,7 +15,7 @@ import static ms.gamerecommender.business.service.ValueFactory.*;
 
 class CollaborativeGameRecommenderTest {
 
-    private String csvPathForOneUser =  "src/test/resources/dataModelOneUser.csv";
+    private final String csvPathForOneUser =  "src/test/resources/dataModelOneUser.csv";
 
     @AfterEach
     void tearDown() {
