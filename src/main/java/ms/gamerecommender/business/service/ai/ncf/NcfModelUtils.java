@@ -7,7 +7,6 @@ import ai.djl.ndarray.NDManager;
 import ai.djl.ndarray.types.Shape;
 import ai.djl.nn.Activation;
 import ai.djl.nn.Blocks;
-import ai.djl.nn.ParallelBlock;
 import ai.djl.nn.SequentialBlock;
 import ai.djl.nn.core.Linear;
 import ai.djl.translate.Translator;
@@ -38,18 +37,7 @@ public class NcfModelUtils {
     private SequentialBlock ncfModel(int numberOfUsers, int numberOfGames) {
         val block = new SequentialBlock();
 
-        val parallelBlock = new ParallelBlock(
-                list -> {
-                    NDList userEmbedding = list.get(0);
-                    NDList gameEmbedding = list.get(1);
-                    return new NDList(userEmbedding.singletonOrThrow().concat(gameEmbedding.singletonOrThrow(), -1));
-                }
-        );
-
-        parallelBlock.add(new UserGameEmbedding(numberOfUsers, EMBEDDING_SIZE));
-        parallelBlock.add(new UserGameEmbedding(numberOfGames, EMBEDDING_SIZE));
-
-        block.add(parallelBlock);
+        block.add(new UserGameParallelBlock(numberOfUsers, numberOfGames, EMBEDDING_SIZE));
 
         block.add(Blocks.batchFlattenBlock());
 
@@ -70,7 +58,7 @@ public class NcfModelUtils {
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(ncfModel(maxUsers, maxGames));
 
-            modelTraining(model, dataset, new Shape(1), numberOfEpochs);
+            modelTraining(model, dataset, new Shape(), numberOfEpochs);
 
             val predictor = model.newPredictor(new NcfTranslator());
 
@@ -86,7 +74,7 @@ public class NcfModelUtils {
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(ncfModel(maxUsers, maxGames));
 
-            modelTraining(model, dataset, new Shape(1), numberOfEpochs);
+            modelTraining(model, dataset, new Shape(), numberOfEpochs);
 
             val predictor = model.newPredictor(new NcfTranslator());
 
