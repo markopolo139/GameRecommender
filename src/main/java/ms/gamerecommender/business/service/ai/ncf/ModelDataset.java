@@ -20,7 +20,7 @@ public class ModelDataset extends RandomAccessDataset {
     List<NcfDataPoint> dataPoints;
 
     public ModelDataset(List<NcfDataPoint> dataPoints) {
-        super(new Builder().setSampling(new BatchSampler(new RandomSampler(), 1)));
+        super(new Builder().setSampling(new BatchSampler(new RandomSampler(), 16)));
         this.dataPoints = dataPoints;
     }
 

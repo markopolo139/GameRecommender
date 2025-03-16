@@ -104,7 +104,7 @@ public class NcfModelUtils {
             for (CSVRecord csvRecord : csvParser) {
                 int userId = Integer.parseInt(csvRecord.get(0).trim());
                 int gameId = Integer.parseInt(csvRecord.get(1).trim());
-                int score = Integer.parseInt(csvRecord.get(2).trim());
+                float score = Float.parseFloat(csvRecord.get(2).trim());
 
                 dataPoints.add(new NcfDataPoint(userId, gameId, score));
             }
