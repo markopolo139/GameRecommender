@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //TODO:
-// Interface for AI models with function trainAndPredict (also with batch predict)
-// Do AI models neural collaborative
+// General test  of AI recommenders (class: AiGameRecommenderTest)
 // AI_Recommender which will just use AI via recommender interface, remeber to connect prediction with games (via map f.e.)
 // Play around with steam api using insomnia
 // IStoreServicce has app details and tag list, docs: https://steamapi.xpaw.me/#IStoreService/GetTagList
@@ -17,7 +16,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // Put to FeatureVector all avaiable tags when extracted from SteamAPI
 // Config for spring security
 // Create in app config for creating beans for recommenders
-// For now dataaModel from mahoot will be read from csv file, csv created during loading of user games via api and then saving in resources
+// For now dataaModel from mahoot and for NFC Model will be read from csv file, csv created during loading of user games via api and then saving in resources
 //  and this file will be updated each time some user makes changes to their owned games or ranking or updates time played,
 //  maybe it will be easier to store score in column of table for games instead of calculating it for all owned games each time new game is added
 // Quick database setup
@@ -27,6 +26,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // Create serivce for adding ratings and reviews
 // Create service which will output recommendations (one for algorithmic and one for AI)
 // HTMX for frontend (docs and learn)
+// Think about saving model for NCF
 @SpringBootApplication
 public class GameRecommenderApplication {
     public static void main(String[] args) {
