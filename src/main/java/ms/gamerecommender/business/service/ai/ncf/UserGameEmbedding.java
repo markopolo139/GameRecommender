@@ -13,7 +13,7 @@ import java.util.Optional;
 public class UserGameEmbedding extends Embedding<Integer> {
 
     protected UserGameEmbedding(int numEmbeddings, int embeddingSize) {
-        super(new UserGameEmbeddingBuilder().optNumEmbeddings(numEmbeddings).setEmbeddingSize(embeddingSize));
+        super(new UserGameEmbeddingBuilder().optNumEmbeddings(numEmbeddings + 1).setEmbeddingSize(embeddingSize));
     }
 
     @Override

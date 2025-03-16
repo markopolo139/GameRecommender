@@ -7,6 +7,7 @@ import ai.djl.ndarray.NDManager;
 import ai.djl.ndarray.types.Shape;
 import ai.djl.nn.Activation;
 import ai.djl.nn.Blocks;
+import ai.djl.nn.ParallelBlock;
 import ai.djl.nn.SequentialBlock;
 import ai.djl.nn.core.Linear;
 import ai.djl.translate.Translator;
@@ -37,8 +38,18 @@ public class NcfModelUtils {
     private SequentialBlock ncfModel(int numberOfUsers, int numberOfGames) {
         val block = new SequentialBlock();
 
-        block.add(new UserGameEmbedding(numberOfUsers, EMBEDDING_SIZE));
-        block.add(new UserGameEmbedding(numberOfGames, EMBEDDING_SIZE));
+        val parallelBlock = new ParallelBlock(
+                list -> {
+                    NDList userEmbedding = list.get(0);
+                    NDList gameEmbedding = list.get(1);
+                    return new NDList(userEmbedding.singletonOrThrow().concat(gameEmbedding.singletonOrThrow(), -1));
+                }
+        );
+
+        parallelBlock.add(new UserGameEmbedding(numberOfUsers, EMBEDDING_SIZE));
+        parallelBlock.add(new UserGameEmbedding(numberOfGames, EMBEDDING_SIZE));
+
+        block.add(parallelBlock);
 
         block.add(Blocks.batchFlattenBlock());
 

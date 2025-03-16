@@ -20,7 +20,7 @@ public class ModelDataset extends RandomAccessDataset {
     List<NcfDataPoint> dataPoints;
 
     public ModelDataset(List<NcfDataPoint> dataPoints) {
-        super(new Builder().setSampling(new BatchSampler(new RandomSampler(), 16)));
+        super(new Builder().setSampling(new BatchSampler(new RandomSampler(), 1)));
         this.dataPoints = dataPoints;
     }
 
@@ -28,9 +28,9 @@ public class ModelDataset extends RandomAccessDataset {
     public Record get(NDManager manager, long index) throws IOException {
         val point =  dataPoints.get((int) index);
 
-        val userId = manager.create(point.userId());
-        val gameId = manager.create(point.gameId());
-        val targetScore = manager.create(point.score());
+        val userId = manager.create(new int[] { point.userId() });
+        val gameId = manager.create(new int[] { point.gameId() });
+        val targetScore = manager.create(new float[] { point.score() });
 
         return new Record(new NDList(userId, gameId), new NDList(targetScore));
     }
