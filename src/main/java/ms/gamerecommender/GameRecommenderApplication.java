@@ -4,8 +4,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //TODO:
-// General test  of AI recommenders (class: AiGameRecommenderTest)
-// AI_Recommender which will just use AI via recommender interface, remeber to connect prediction with games (via map f.e.)
+// Test other models and as input for AI models that maybe pair Game and userID
 // Play around with steam api using insomnia
 // IStoreServicce has app details and tag list, docs: https://steamapi.xpaw.me/#IStoreService/GetTagList
 // ISteamUserStats for stats of user for the game

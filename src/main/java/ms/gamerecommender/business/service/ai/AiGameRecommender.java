@@ -35,6 +35,7 @@ public class AiGameRecommender implements Recommender<UserProfile, Game> {
         return combinedGames.stream()
                 .sorted(Comparator.comparingDouble(Pair::getRight))
                 .map(Pair::getLeft)
+                .limit(topN)
                 .toList();
     }
 }

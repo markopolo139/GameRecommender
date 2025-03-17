@@ -46,7 +46,7 @@ public class UserGameParallelBlock extends AbstractBlock {
 
     @Override
     public Shape[] getOutputShapes(Shape[] inputShapes) {
-        return new Shape[] { new Shape(inputShapes[0].get(0), EMBEDDING_SIZE * 2L) };
+        return new Shape[] { new Shape(1L, EMBEDDING_SIZE * 2L) };
     }
 
     @Override

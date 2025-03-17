@@ -13,7 +13,7 @@ import java.util.Set;
 
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @UtilityClass
-class ValueFactory {
+public class ValueFactory {
     Integer GAME_ID = 0;
     Integer USER_ID = 1;
 
