@@ -14,13 +14,11 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import static ms.gamerecommender.business.DatasetUtility.*;
+import static ms.gamerecommender.business.service.RecommenderUtils.*;
 
 @UtilityClass
 @FieldDefaults(level = AccessLevel.PRIVATE,  makeFinal = true)
 class ContentBasedGameRecommender {
-
-    double positiveReviewPercentageCutOff = 80;
-
     private Map<String, Double> getTagsPreferenceMap(List<UserGame> playedGames) {
         Map<String, Double> tagsPreferenceMap = Maps.newHashMap();
         playedGames.forEach(game -> {
@@ -58,7 +56,7 @@ class ContentBasedGameRecommender {
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         return similarityScores.entrySet().stream()
-                .filter(entry -> entry.getKey().getPositiveReviewPercentage() >= positiveReviewPercentageCutOff)
+                .filter(entry -> entry.getKey().getPositiveReviewPercentage() >= POSITIVE_REVIEW_PERCENTAGE_CUT_OFF)
                 .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
                 .limit(topN)
                 .map(Map.Entry::getKey)

@@ -17,6 +17,8 @@ import org.apache.mahout.cf.taste.similarity.UserSimilarity;
 
 import java.util.List;
 
+import static ms.gamerecommender.business.service.RecommenderUtils.*;
+
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @UtilityClass
 class CollaborativeGameRecommender {
@@ -28,6 +30,8 @@ class CollaborativeGameRecommender {
 
         val gameIds = recommender.recommend(userId, topN).stream().map(RecommendedItem::getItemID).toList();
 
-        return dataset.stream().filter(game -> gameIds.contains((long) game.getGameId())).toList();
+        return dataset.stream().filter(
+                game -> gameIds.contains((long) game.getGameId()) && game.getPositiveReviewPercentage() >= POSITIVE_REVIEW_PERCENTAGE_CUT_OFF
+        ).toList();
     }
 }

@@ -13,12 +13,11 @@ import java.io.File;
 import java.util.LinkedHashSet;
 import java.util.List;
 
+import static ms.gamerecommender.business.service.RecommenderUtils.*;
+
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HybridGameRecommender implements Recommender<UserProfile, Game> {
-
-    static double TOP_N_FACTOR = 0.75;
-
     Integer nearestNeighbors;
     String csvPath;
 
@@ -30,6 +29,7 @@ public class HybridGameRecommender implements Recommender<UserProfile, Game> {
         val collaborativeRecommendations = CollaborativeGameRecommender.recommend(
                 input.userId(), new FileDataModel(new File(csvPath)),dataset, nearestNeighbors, howManyRecommend
         );
+
         val contentBasedRecommendations = ContentBasedGameRecommender.recommend(input.ownedGames(), dataset, howManyRecommend);
 
         val result = new LinkedHashSet<Game>();
