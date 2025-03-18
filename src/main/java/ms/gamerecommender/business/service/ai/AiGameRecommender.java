@@ -2,6 +2,7 @@ package ms.gamerecommender.business.service.ai;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import ms.gamerecommender.business.service.Recommender;
@@ -19,6 +20,8 @@ import static ms.gamerecommender.business.service.RecommenderUtils.*;
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AiGameRecommender implements Recommender<UserProfile, Game> {
+
+    @Getter(AccessLevel.PACKAGE)
     AiPredict<Game, Float> predictModel;
 
     @Override
