@@ -3,21 +3,26 @@ package ms.gamerecommender.business.service.ai.dl;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
-import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserGame;
+import org.apache.mahout.math.RandomAccessSparseVector;
+import org.apache.mahout.math.Vector;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static ms.gamerecommender.business.service.RecommenderUtils.*;
 
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class FeatureVector {
     static int NUMERICAL_FEATURES = 1;
-    static List<String> AVAILABLE_TAGS = List.of(
-            "Soulslike", "Action", "RPG", "JRPG", "Strategy", "RTS", "Shooter", "Puzzle", "Single-player", "MMO",
-            "Fantasy", "Platformer", "Retro", "Third-person", "First-person", "Multiplayer", "History", "Turn-based",
-            "Cards", "Roguelike", "Dungeon crawler", "Music", "Visual Novel", "Story", "Adventure", "Open World"
-    );
+    static List<String> AVAILABLE_TAGS = readTagsFromFile();
+    static Map<String, Integer> TAG_INDEX_MAP = IntStream.range(0, AVAILABLE_TAGS.size())
+            .boxed()
+            .collect(Collectors.toMap(AVAILABLE_TAGS::get, i -> i));
 
     public static int VECTOR_SIZE = NUMERICAL_FEATURES + AVAILABLE_TAGS.size();
 
@@ -51,16 +56,5 @@ public class FeatureVector {
         System.arraycopy(tagEncoding, 0, output, NUMERICAL_FEATURES, tagEncoding.length);
 
         return output;
-    }
-
-    private float[] encodeTags(Set<String> tags) {
-        float[] encoding = new float[AVAILABLE_TAGS.size()];
-
-        for (String tag: tags) {
-            val index = AVAILABLE_TAGS.indexOf(tag);
-            encoding[index] = 1.0f;
-        }
-
-        return encoding;
     }
 }
