@@ -15,7 +15,7 @@ import java.util.List;
 public class RecommenderUtils {
     public double POSITIVE_REVIEW_PERCENTAGE_CUT_OFF = 80;
     public double TOP_N_FACTOR = 0.75;
-    String TAG_FILE_PATH = "src/main/resources/dataModel.csv";
+    String TAG_FILE_PATH = "src/main/resources/steamTags.txt";
 
     @SneakyThrows
     public List<String> readTagsFromFile() {

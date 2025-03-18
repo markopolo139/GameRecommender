@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserGame;
-import org.apache.mahout.math.RandomAccessSparseVector;
-import org.apache.mahout.math.Vector;
 
 import java.util.List;
 import java.util.Map;
@@ -56,5 +54,15 @@ public class FeatureVector {
         System.arraycopy(tagEncoding, 0, output, NUMERICAL_FEATURES, tagEncoding.length);
 
         return output;
+    }
+
+    private float[] encodeTags(Set<String> tags) {
+        float[] encoding = new float[AVAILABLE_TAGS.size()];
+
+        for (String tag: tags) {
+            encoding[TAG_INDEX_MAP.get(tag)] = 1.0f;
+        }
+
+        return encoding;
     }
 }

@@ -11,16 +11,14 @@ import org.thymeleaf.util.StringUtils;
 
 import java.util.*;
 
+import static ms.gamerecommender.business.service.RecommenderUtils.*;
+
 @UtilityClass
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class SyntheticDataGenerator {
     Random random = new Random(156042);
 
-    List<String> availableTags = List.of(
-            "Soulslike", "Action", "RPG", "JRPG", "Strategy", "RTS", "Shooter", "Puzzle", "Single-player", "MMO",
-            "Fantasy", "Platformer", "Retro", "Third-person", "First-person", "Multiplayer", "History", "Turn-based",
-            "Cards", "Roguelike", "Dungeon crawler", "Music", "Visual Novel", "Story", "Adventure", "Open World"
-    );
+    List<String> availableTags = readTagsFromFile();
 
     public Game createGame(int id, Set<String> tags, double positivePercent) {
         return new Game(id, StringUtils.randomAlphanumeric(10), tags, positivePercent);
