@@ -14,11 +14,11 @@ import java.util.Comparator;
 import java.util.List;
 
 import static ms.gamerecommender.business.DatasetUtility.*;
+import static ms.gamerecommender.business.service.RecommenderUtils.*;
 
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class AiGameRecommender implements Recommender<UserProfile, Game> {
-
     AiPredict<Game, Float> predictModel;
 
     @Override
@@ -35,6 +35,7 @@ public class AiGameRecommender implements Recommender<UserProfile, Game> {
         return combinedGames.stream()
                 .sorted(Comparator.comparingDouble(Pair::getRight))
                 .map(Pair::getLeft)
+                .filter(it -> it.getPositiveReviewPercentage() >= POSITIVE_REVIEW_PERCENTAGE_CUT_OFF)
                 .limit(topN)
                 .toList();
     }
