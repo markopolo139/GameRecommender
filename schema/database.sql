@@ -26,6 +26,7 @@ create table if not exists user_games(
        timePlayed float not null,
        rating float default 0.0,
        review enum('positive', 'none', 'negative') default 'none',
+       score float default 0.0,
        constraint player_to_user_profile foreign key(user_id) references user_profiles(user_id)
            on delete CASCADE
            on update CASCADE,
