@@ -4,7 +4,9 @@ import ms.gamerecommender.app.persistence.UserProfileEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface UserProfileRepository extends JpaRepository<UserProfileEntity, Integer> {
-    UserProfileEntity findByUsername(String username);
+    Optional<UserProfileEntity> findByUsername(String username);
 }
