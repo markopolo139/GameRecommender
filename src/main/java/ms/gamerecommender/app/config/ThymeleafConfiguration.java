@@ -15,7 +15,7 @@ public class ThymeleafConfiguration {
 
     @Bean
     @Scope("singleton")
-    public ITemplateResolver templateResolver() {
+    public ITemplateResolver getTemplateResolver() {
         val templateResolver = new ClassLoaderTemplateResolver();
 
         templateResolver.setPrefix("templates/");
@@ -30,10 +30,10 @@ public class ThymeleafConfiguration {
 
     @Bean
     @Scope("singleton")
-    public ITemplateEngine templateEngine() {
+    public ITemplateEngine getTemplateEngine() {
         val engine = new TemplateEngine();
 
-        engine.setTemplateResolver(templateResolver());
+        engine.setTemplateResolver(getTemplateResolver());
         engine.addDialect(new Java8TimeDialect());
 
         return engine;
