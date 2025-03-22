@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 import ms.gamerecommender.business.value.UserGame;
 
@@ -33,13 +34,16 @@ public class UserGameEntity {
     float timePlayed;
 
     @Column(name = "rating")
+    @Setter
     float rating;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "review")
+    @Setter
     UserGame.Review review;
 
     @Column(name = "score")
+    @Setter
     float score;
 
     protected UserGameEntity() {}
