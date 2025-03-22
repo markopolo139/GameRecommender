@@ -3,7 +3,6 @@ package ms.gamerecommender.app.config;
 import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -24,7 +23,6 @@ public class SecurityConfiguration {
     PasswordEncoder passwordEncoder;
     UserDetailsService userDetailsService;
 
-    @Autowired
     public SecurityConfiguration(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;

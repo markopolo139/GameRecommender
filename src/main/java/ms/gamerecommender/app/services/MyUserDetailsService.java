@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.experimental.FieldDefaults;
 import lombok.val;
 import ms.gamerecommender.app.persistence.repo.UserProfileRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +15,6 @@ public class MyUserDetailsService implements UserDetailsService {
 
     UserProfileRepository userProfileRepository;
 
-    @Autowired
     public MyUserDetailsService(UserProfileRepository userProfileRepository) {
         this.userProfileRepository = userProfileRepository;
     }
