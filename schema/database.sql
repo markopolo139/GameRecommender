@@ -1,10 +1,10 @@
-create table user_profiles(
+create table if not exists user_profiles(
       user_id int primary key not null auto_increment,
       username varchar(64) unique not null,
       password varchar(256) not null
 );
 
-create table games(
+create table if not exists games(
     game_id int primary key not null auto_increment,
     title varchar(256) unique not null,
     positiveReviewPercentage float not null,
@@ -12,7 +12,7 @@ create table games(
     price float default 0.0
 );
 
-create table game_tags(
+create table if not exists game_tags(
     game_id int primary key not null auto_increment,
     tag varchar(256) not null,
     constraint game_to_tags foreign key(game_id) references games(game_id)
@@ -20,7 +20,7 @@ create table game_tags(
         on update CASCADE
 );
 
-create table user_games(
+create table if not exists user_games(
        user_id int not null,
        game_id int not null,
        timePlayed float not null,
