@@ -7,8 +7,8 @@ create table if not exists user_profiles(
 create table if not exists games(
     game_id int primary key not null auto_increment,
     title varchar(256) unique not null,
-    positiveReviewPercentage float not null,
-    metacriticScore float default 0.0,
+    positive_review_percentage float not null,
+    metacritic_score float default 0.0,
     price float default 0.0
 );
 
@@ -23,7 +23,7 @@ create table if not exists game_tags(
 create table if not exists user_games(
        user_id int not null,
        game_id int not null,
-       timePlayed float not null,
+       time_played float not null,
        rating float default 0.0,
        review enum('positive', 'none', 'negative') default 'none',
        score float default 0.0,
