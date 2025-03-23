@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
 import java.util.Objects;
@@ -21,9 +22,11 @@ public class UserProfileEntity {
     int id;
 
     @Column(name = "username", nullable = false, unique = true)
+    @Setter
     String username;
 
     @Column(name = "password", nullable = false)
+    @Setter
     String password;
 
     @OneToMany(mappedBy = "userProfileEntity", orphanRemoval = true, cascade = CascadeType.ALL)
