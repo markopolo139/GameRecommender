@@ -1,13 +1,11 @@
 package ms.gamerecommender.app.entities;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import ms.gamerecommender.business.value.Game;
 
 import java.util.Set;
 
-@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @Getter
 public class AppGame extends Game {

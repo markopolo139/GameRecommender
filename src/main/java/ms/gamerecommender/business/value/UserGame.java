@@ -19,6 +19,13 @@ public class UserGame extends Game {
     double rating;
     Review review;
 
+    public UserGame(Game game, double timePlayed, double rating, Review review) {
+        super(game.getGameId(), game.getTitle(), game.getTags(), game.getPositiveReviewPercentage());
+        this.timePlayed = timePlayed;
+        this.rating = rating;
+        this.review = review;
+    }
+
     public UserGame(int gameId, String title, Set<String> tags, double positivePercentage, double timePlayed, double rating) {
         super(gameId, title, tags, positivePercentage);
         this.timePlayed = timePlayed;

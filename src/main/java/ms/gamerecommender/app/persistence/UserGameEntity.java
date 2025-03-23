@@ -38,7 +38,7 @@ public class UserGameEntity {
     float rating;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "review")
+    @Column(name = "review", nullable = false)
     @Setter
     UserGame.Review review;
 
