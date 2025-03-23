@@ -46,6 +46,16 @@ public class UserGameEntity {
     @Setter
     float score;
 
+    public UserGameEntity(UserProfileEntity userProfileEntity, GameEntity gameEntity, float timePlayed, float rating, UserGame.Review review, float score) {
+        this.userGameId = new UserGameId(userProfileEntity.getId(), gameEntity.getId());
+        this.userProfileEntity = userProfileEntity;
+        this.gameEntity = gameEntity;
+        this.timePlayed = timePlayed;
+        this.rating = rating;
+        this.review = review;
+        this.score = score;
+    }
+
     protected UserGameEntity() {}
 
     @Override
