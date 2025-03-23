@@ -17,6 +17,7 @@ public class AppConverters {
         return new AppGame(
                 gameEntity.getId(), gameEntity.getTitle(), gameEntity.getTags(), gameEntity.getPositiveReviewPercentage(),
                 gameEntity.getMetacriticScore(), gameEntity.getPrice()
+
         );
     }
 

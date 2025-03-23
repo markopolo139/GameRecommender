@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.experimental.FieldDefaults;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,11 +33,13 @@ public class GameEntity {
     @Column(name = "positive_review_percentage", nullable = false)
     double positiveReviewPercentage;
 
+    @Nullable
     @Column(name = "metacritic_score")
-    double metacriticScore;
+    Double metacriticScore;
 
+    @Nullable
     @Column(name = "price")
-    double price;
+    Double price;
 
     protected GameEntity() {}
 

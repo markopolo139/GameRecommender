@@ -33,7 +33,7 @@ public class UserGameEntity {
     @Column(name = "time_played", nullable = false)
     float timePlayed;
 
-    @Column(name = "rating")
+    @Column(name = "rating", nullable = false)
     @Setter
     float rating;
 
@@ -42,7 +42,7 @@ public class UserGameEntity {
     @Setter
     UserGame.Review review;
 
-    @Column(name = "score")
+    @Column(name = "score", nullable = false)
     @Setter
     float score;
 
