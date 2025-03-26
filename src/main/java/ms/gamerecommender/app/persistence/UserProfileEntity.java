@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.FieldDefaults;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -31,6 +32,13 @@ public class UserProfileEntity {
 
     @OneToMany(mappedBy = "userProfileEntity", orphanRemoval = true, cascade = CascadeType.ALL)
     Set<UserGameEntity> userGames;
+
+    public UserProfileEntity(String username, String password) {
+        this.id = 0;
+        this.username = username;
+        this.password = password;
+        this.userGames = new HashSet<>();
+    }
 
     protected UserProfileEntity() {}
 
