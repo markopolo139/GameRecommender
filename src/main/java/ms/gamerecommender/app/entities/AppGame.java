@@ -1,12 +1,15 @@
 package ms.gamerecommender.app.entities;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.experimental.FieldDefaults;
 import ms.gamerecommender.business.value.Game;
 
 import javax.annotation.Nullable;
 import java.util.Set;
 
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 @EqualsAndHashCode(callSuper = true)
 @Getter
 public class AppGame extends Game {
