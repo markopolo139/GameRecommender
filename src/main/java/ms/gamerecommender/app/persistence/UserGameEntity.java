@@ -31,11 +31,11 @@ public class UserGameEntity {
     GameEntity gameEntity;
 
     @Column(name = "time_played", nullable = false)
-    float timePlayed;
+    double timePlayed;
 
     @Column(name = "rating", nullable = false)
     @Setter
-    float rating;
+    double rating;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "review", nullable = false)
@@ -44,9 +44,9 @@ public class UserGameEntity {
 
     @Column(name = "score", nullable = false)
     @Setter
-    float score;
+    double score;
 
-    public UserGameEntity(UserProfileEntity userProfileEntity, GameEntity gameEntity, float timePlayed, float rating, UserGame.Review review, float score) {
+    public UserGameEntity(UserProfileEntity userProfileEntity, GameEntity gameEntity, double timePlayed, double rating, UserGame.Review review, double score) {
         this.userGameId = new UserGameId(userProfileEntity.getId(), gameEntity.getId());
         this.userProfileEntity = userProfileEntity;
         this.gameEntity = gameEntity;
