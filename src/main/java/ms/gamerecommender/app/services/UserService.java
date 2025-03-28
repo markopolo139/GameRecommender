@@ -23,7 +23,7 @@ public class UserService {
     UserProfileRepository repository;
     PasswordEncoder encoder;
 
-    private int userId = getUserID();
+    int userId = getUserID();
 
     public void createUser(String username, String password) {
         if (repository.existsByUsername(username)) {
