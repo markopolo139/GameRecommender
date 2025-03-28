@@ -31,6 +31,7 @@ public class UserGameEntity {
     GameEntity gameEntity;
 
     @Column(name = "time_played", nullable = false)
+    @Setter
     double timePlayed;
 
     @Column(name = "rating", nullable = false)
