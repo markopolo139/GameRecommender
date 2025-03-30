@@ -16,13 +16,7 @@ import lombok.SneakyThrows;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.UtilityClass;
 import lombok.val;
-import org.apache.commons.csv.CSVFormat;
-import org.apache.commons.csv.CSVParser;
-import org.apache.commons.csv.CSVRecord;
 
-import java.io.FileReader;
-import java.io.Reader;
-import java.util.ArrayList;
 import java.util.List;
 
 import static ms.gamerecommender.business.service.ai.ModelUtils.*;
@@ -52,8 +46,8 @@ public class NcfModelUtils {
     }
 
     @SneakyThrows
-    public float trainAndPredict(String csvFilePath, int userId, int gameId, int maxUsers, int maxGames, int numberOfEpochs) {
-        val dataset = createModelDataset(csvFilePath);
+    public float trainAndPredict(List<NcfDataPoint> preferences, int userId, int gameId, int maxUsers, int maxGames, int numberOfEpochs) {
+        val dataset = createModelDataset(preferences);
 
         try (val model = Model.newInstance("game-recommender")) {
             model.setBlock(ncfModel(maxUsers, maxGames));
@@ -67,8 +61,8 @@ public class NcfModelUtils {
     }
 
     @SneakyThrows
-    public List<Float> trainAndBatchPredict(String csvFilePath, int userId, List<Integer> gameIds, int maxUsers, int maxGames, int numberOfEpochs) {
-        val dataset = createModelDataset(csvFilePath);
+    public List<Float> trainAndBatchPredict(List<NcfDataPoint> preferences, int userId, List<Integer> gameIds, int maxUsers, int maxGames, int numberOfEpochs) {
+        val dataset = createModelDataset(preferences);
         val predictInput = gameIds.stream().map(gameId -> new NcfInput(userId, gameId)).toList();
 
         try (val model = Model.newInstance("game-recommender")) {
@@ -82,27 +76,8 @@ public class NcfModelUtils {
         }
     }
 
-    @SneakyThrows
-    private List<NcfDataPoint> loadFromCsv(String csvFilePath) {
-        val dataPoints = new ArrayList<NcfDataPoint>();
-
-        try (Reader reader = new FileReader(csvFilePath)) {
-            CSVParser csvParser = CSVParser.parse(reader, CSVFormat.DEFAULT);
-
-            for (CSVRecord csvRecord : csvParser) {
-                int userId = Integer.parseInt(csvRecord.get(0).trim());
-                int gameId = Integer.parseInt(csvRecord.get(1).trim());
-                float score = Float.parseFloat(csvRecord.get(2).trim());
-
-                dataPoints.add(new NcfDataPoint(userId, gameId, score));
-            }
-        }
-
-        return dataPoints;
-    }
-
-    private ModelDataset createModelDataset(String csvFilePath) {
-        return new ModelDataset(loadFromCsv(csvFilePath));
+    private ModelDataset createModelDataset(List<NcfDataPoint> preferences) {
+        return new ModelDataset(preferences);
     }
 
     private class NcfTranslator implements Translator<NcfInput, Float> {

@@ -7,9 +7,13 @@ import lombok.experimental.FieldDefaults;
 import lombok.val;
 import ms.gamerecommender.business.value.Game;
 import ms.gamerecommender.business.value.UserProfile;
-import org.apache.mahout.cf.taste.impl.model.file.FileDataModel;
+import org.apache.mahout.cf.taste.impl.common.FastByIDMap;
+import org.apache.mahout.cf.taste.impl.model.GenericDataModel;
+import org.apache.mahout.cf.taste.model.Preference;
+import org.apache.mahout.cf.taste.model.PreferenceArray;
 
-import java.io.File;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.LinkedHashSet;
 import java.util.List;
 
@@ -19,7 +23,7 @@ import static ms.gamerecommender.business.service.RecommenderUtils.*;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class HybridGameRecommender implements Recommender<UserProfile, Game> {
     Integer nearestNeighbors;
-    String csvPath;
+    List<Preference> preferences;
 
     @Override
     @SneakyThrows
@@ -27,7 +31,7 @@ public class HybridGameRecommender implements Recommender<UserProfile, Game> {
         val howManyRecommend = (int) Math.round(TOP_N_FACTOR * topN);
 
         val collaborativeRecommendations = CollaborativeGameRecommender.recommend(
-                input.userId(), new FileDataModel(new File(csvPath)),dataset, nearestNeighbors, howManyRecommend
+                input.userId(), new GenericDataModel(convertPreferencesToArray(preferences)), dataset, nearestNeighbors, howManyRecommend
         );
 
         val contentBasedRecommendations = ContentBasedGameRecommender.recommend(input.ownedGames(), dataset, howManyRecommend);
@@ -37,5 +41,24 @@ public class HybridGameRecommender implements Recommender<UserProfile, Game> {
         result.addAll(contentBasedRecommendations);
 
         return result.stream().limit(topN).toList();
+    }
+
+    private FastByIDMap<PreferenceArray> convertPreferencesToArray(List<Preference> preferences) {
+        FastByIDMap<Collection<Preference>> tempUserData = new FastByIDMap<>();
+        for (Preference pref : preferences) {
+            long userID = pref.getUserID();
+            var userPrefs = tempUserData.get(userID);
+
+            if (userPrefs == null) {
+                userPrefs = new ArrayList<>();
+                userPrefs.add(pref);
+                tempUserData.put(userID, userPrefs);
+            }
+            else {
+                userPrefs.add(pref);
+            }
+        }
+
+        return GenericDataModel.toDataMap(tempUserData, true);
     }
 }
