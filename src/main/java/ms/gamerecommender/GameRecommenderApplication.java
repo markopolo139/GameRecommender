@@ -4,10 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //TODO:
-// Create service which will output recommendations (one for algorithmic and one for AI)
-// ^ For dataModel propably make that it will for each recommend call extract from database columns needed via JPA Criterion (check chatGPT) and save it to csv file
-// Maybe extract info from database not from csv file, check DeepSeak and maybe search for solution, maybe GenericDataModel can be used with reading of preference List from result of query from above (Criterion)
-// ^ For this HybridGameRecommender and NcfModelPredict would need to receive List<Preferences> of ready DAtaModel instead of CSV Path
 // Create service for exchaning info with steamApi (RestClient [I think, to check])
 // ^ models for outputs and inputs from/to api and converters to Persistence entity
 // Reload user data, use created merge function in userGameService
