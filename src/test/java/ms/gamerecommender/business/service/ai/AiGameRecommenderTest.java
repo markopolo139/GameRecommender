@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static ms.gamerecommender.business.service.TestUtils.*;
 import static ms.gamerecommender.business.service.ValueFactory.*;
 import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.*;
 
@@ -55,7 +56,7 @@ class AiGameRecommenderTest {
         ));
 
         val recommender = new AiGameRecommender(
-                new NcfModelPredict(7, 50, 100, "src/test/resources/dataModelOneUser.csv", 1)
+                new NcfModelPredict(7, 50, 100, readCsvFile("src/test/resources/dataModelOneUser.csv"), 1)
         );
 
         val predictions = recommender.recommend(userProfile, dataset, 5);

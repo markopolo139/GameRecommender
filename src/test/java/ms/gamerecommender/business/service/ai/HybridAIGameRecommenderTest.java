@@ -11,9 +11,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static ms.gamerecommender.business.service.ValueFactory.createUserGame;
+import static ms.gamerecommender.business.service.TestUtils.*;
+import static ms.gamerecommender.business.service.ValueFactory.*;
 import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 class HybridAIGameRecommenderTest {
 
@@ -34,7 +34,7 @@ class HybridAIGameRecommenderTest {
         );
 
         val ncfRecommender = new AiGameRecommender(
-                new NcfModelPredict(7, 50, 100, "src/test/resources/dataModelOneUser.csv", 1)
+                new NcfModelPredict(7, 50, 100, readCsvFile("src/test/resources/dataModelOneUser.csv"), 1)
         );
 
         Assertions.assertThrows(InvalidPredictModelException.class, () -> {
@@ -67,7 +67,7 @@ class HybridAIGameRecommenderTest {
         );
 
         val ncfRecommender = new AiGameRecommender(
-                new NcfModelPredict(7, 50, 100, "src/test/resources/dataModelOneUser.csv", 1)
+                new NcfModelPredict(7, 50, 100, readCsvFile("src/test/resources/dataModelOneUser.csv"), 1)
         );
 
         val recommender = new HybridAIGameRecommender(dlRecommender, ncfRecommender);

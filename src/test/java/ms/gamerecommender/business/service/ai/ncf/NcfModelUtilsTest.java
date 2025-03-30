@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import static ms.gamerecommender.business.service.ai.SyntheticDataGenerator.*;
@@ -42,13 +43,11 @@ class NcfModelUtilsTest {
                 createUserProfile(15, dataset,50)
         );
 
-        createCsvFile(users);
-
         val notPlayedGames = dataset.stream().map(Game::getGameId).filter(
                 gameId -> user.ownedGames().stream().allMatch(userGame -> userGame.getGameId() != gameId)
         ).toList();
 
-        val predicitons = trainAndBatchPredict(csvFilePath, user.userId(), notPlayedGames, users.size() + 1, dataset.size(), 15);
+        val predicitons = trainAndBatchPredict(mapUsersToNcfData(users), user.userId(), notPlayedGames, users.size() + 1, dataset.size(), 15);
 
         System.out.println();
     }
@@ -65,5 +64,16 @@ class NcfModelUtilsTest {
                 }
             }
         }
+    }
+
+    private List<NcfDataPoint> mapUsersToNcfData(List<UserProfile> users) {
+        List<NcfDataPoint> ncfDataPoints = new ArrayList<>();
+        for (UserProfile user : users) {
+            for (UserGame game: user.ownedGames()) {
+                ncfDataPoints.add(new NcfDataPoint(user.userId(), game.getGameId(), (float) game.calculateScore()));
+            }
+        }
+
+        return ncfDataPoints;
     }
 }

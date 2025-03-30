@@ -12,12 +12,13 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Set;
 
+import static ms.gamerecommender.business.service.TestUtils.*;
 import static ms.gamerecommender.business.service.ValueFactory.*;
 
 class HybridGameRecommenderTest {
 
     private String csvPath =  "src/test/resources/dataModel.csv";
-    private final Recommender<UserProfile, Game> recommender = new HybridGameRecommender(6, csvPath);
+    private final Recommender<UserProfile, Game> recommender = new HybridGameRecommender(6, readCsvFile(csvPath));
 
     @AfterEach
     void tearDown() {
