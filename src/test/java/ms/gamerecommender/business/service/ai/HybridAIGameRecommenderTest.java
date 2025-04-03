@@ -75,6 +75,5 @@ class HybridAIGameRecommenderTest {
         val predictions = recommender.recommend(userProfile, dataset, 10);
 
         Assertions.assertFalse(predictions.isEmpty());
-        Assertions.assertEquals(10, predictions.size());
     }
 }

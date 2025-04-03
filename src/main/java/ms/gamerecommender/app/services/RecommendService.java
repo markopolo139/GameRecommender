@@ -45,7 +45,6 @@ public class RecommendService {
     @Value("${recommender.ai.ncf.training.epochs}")
     int ncfTrainingEpochs;
 
-    int userId = getUserID();
 
     public RecommendService(GameRepository gameRepository, UserProfileRepository userProfileRepository, RecommendRepository recommendRepository) {
         this.gameRepository = gameRepository;
@@ -60,7 +59,7 @@ public class RecommendService {
 
         val ncfRecommender = new AiGameRecommender(
                 new NcfModelPredict(
-                        (int) userProfileRepository.count(), (int) gameRepository.count(), ncfTrainingEpochs, getRecommendData(), userId
+                        (int) userProfileRepository.count(), (int) gameRepository.count(), ncfTrainingEpochs, getRecommendData(), getUserID()
                 )
         );
 
@@ -88,6 +87,6 @@ public class RecommendService {
     }
 
     private UserProfile getCurrentUserProfile() {
-        return convertToUserProfile(userProfileRepository.findById(userId).orElseThrow());
+        return convertToUserProfile(userProfileRepository.findById(getUserID()).orElseThrow());
     }
 }

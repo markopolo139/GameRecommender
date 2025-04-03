@@ -23,8 +23,6 @@ public class UserService {
     UserProfileRepository repository;
     PasswordEncoder encoder;
 
-    int userId = getUserID();
-
     public void createUser(String username, String password) {
         if (repository.existsByUsername(username)) {
             log.info("Given username ({}) is already present in database", username);
@@ -35,7 +33,7 @@ public class UserService {
     }
 
     public void updateUsername(String username) {
-        val user = repository.findById(userId).orElseThrow(() -> new AppException("Unexpected Error"));
+        val user = repository.findById(getUserID()).orElseThrow(() -> new AppException("Unexpected Error"));
 
         if (repository.existsByUsername(username)) {
             log.info("User provided new username ({}) is already present in database", username);
@@ -47,10 +45,10 @@ public class UserService {
     }
 
     public void updatePassword(String oldPassword, String newPassword) {
-        val user = repository.findById(userId).orElseThrow(() -> new AppException("Unexpected Error"));
+        val user = repository.findById(getUserID()).orElseThrow(() -> new AppException("Unexpected Error"));
 
         if (!encoder.matches(oldPassword, user.getPassword())) {
-            log.info("User provided old password does not match old password in database (userID: {})", userId);
+            log.info("User provided old password does not match old password in database (userID: {})", getUserID());
             throw new IncorrectPasswordException("User provided invalid old password");
         }
 

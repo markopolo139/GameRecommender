@@ -39,12 +39,10 @@ public class UserGameService {
     GameRepository gameRepository;
     UserProfileRepository userProfileRepository;
 
-    int userId = getUserID();
-
     public void addGameToUserProfile(int gameId, double timePlayed, @Nullable Double rating, @Nullable UserGame.Review review) {
 
         val gameEntity = gameRepository.findById(gameId).orElseThrow(() -> {
-            log.info("Adding Game with id {} not found in table, request from user {}", gameId, userId);
+            log.info("Adding Game with id {} not found in table, request from user {}", gameId, getUserID());
             return new InvalidGameIdException("Game with id " + gameId + " not found");
         });
 
@@ -62,7 +60,7 @@ public class UserGameService {
         val gameToUpdate = getCurrentUserProfileReference().getUserGames().stream().filter(game -> game.getGameEntity().getId() == gameId)
                 .findFirst().orElseThrow(
                         () -> {
-                            log.info("Updating Game with id {} not present in user owned games, request from user {}", gameId, userId);
+                            log.info("Updating Game with id {} not present in user owned games, request from user {}", gameId, getUserID());
                             return new InvalidGameIdException("Game with id " + gameId + " not found");
                         }
         );
@@ -109,7 +107,7 @@ public class UserGameService {
         Specification<UserGameEntity> spec = Specification.where((
                 (root, query, cb) -> {
                     Join<UserGameEntity, UserProfileEntity> userJoin = root.join("userProfileEntity");
-                    return cb.equal(userJoin.get("id"), userId);
+                    return cb.equal(userJoin.get("id"), getUserID());
                 })
         );
 
@@ -162,11 +160,11 @@ public class UserGameService {
     }
 
     private UserProfileEntity getCurrentUserProfileReference() {
-        return userProfileRepository.getReferenceById(userId);
+        return userProfileRepository.getReferenceById(getUserID());
     }
 
     private UserProfileEntity getCurrentUserProfile() {
-        return userProfileRepository.findById(userId).orElseThrow();
+        return userProfileRepository.findById(getUserID()).orElseThrow();
     }
 
     private Set<UserGameEntity> updateUserGamesInfo(Set<UserGameEntity> userGameEntities, Set<UserGameEntity> newUserGameEntities) {
