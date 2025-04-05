@@ -2,6 +2,7 @@ package ms.gamerecommender.business.value;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.NonFinal;
 
 import java.util.Set;
 
@@ -14,5 +15,8 @@ public class Game {
     int gameId;
     String title;
     Set<String> tags;
+
+    @Setter
+    @NonFinal
     double positiveReviewPercentage;
 }
