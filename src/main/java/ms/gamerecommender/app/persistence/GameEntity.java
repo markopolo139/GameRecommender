@@ -18,7 +18,6 @@ import java.util.Set;
 public class GameEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "game_id", nullable = false)
     int id;
 

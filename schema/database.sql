@@ -5,7 +5,7 @@ create table if not exists user_profiles(
 );
 
 create table if not exists games(
-    game_id int primary key not null auto_increment,
+    game_id int primary key not null,
     title varchar(256) unique not null,
     positive_review_percentage float not null,
     metacritic_score float default 0.0,
@@ -13,7 +13,7 @@ create table if not exists games(
 );
 
 create table if not exists game_tags(
-    game_id int primary key not null auto_increment,
+    game_id int not null,
     tag varchar(256) not null,
     constraint game_to_tags foreign key(game_id) references games(game_id)
         on delete CASCADE

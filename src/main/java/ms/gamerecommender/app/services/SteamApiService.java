@@ -96,7 +96,11 @@ public class SteamApiService {
 
         appListResponse.appIds().forEach(it -> {
             val appGame = getAppInfo(it);
-            gameRepository.save(convertToGameEntity(appGame));
+
+            if (!Double.isNaN(appGame.getPositiveReviewPercentage())) {
+                gameRepository.save(convertToGameEntity(appGame));;
+            }
+
         });
     }
 
