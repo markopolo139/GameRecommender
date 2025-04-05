@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @JsonDeserialize(using = AppListSteamResponse.AppListSteamResponseDeserializer.class)
-public record AppListSteamResponse(List<Integer> appId) {
+public record AppListSteamResponse(List<Integer> appIds) {
     static class AppListSteamResponseDeserializer extends StdDeserializer<AppListSteamResponse> {
         protected AppListSteamResponseDeserializer() {
             this(null);
