@@ -30,6 +30,7 @@ public class UserProfileEntity {
     @Setter
     String password;
 
+    @Setter
     @OneToMany(mappedBy = "userProfileEntity", orphanRemoval = true, cascade = CascadeType.ALL)
     Set<UserGameEntity> userGames;
 

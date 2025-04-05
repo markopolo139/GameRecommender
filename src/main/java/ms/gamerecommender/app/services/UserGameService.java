@@ -9,7 +9,6 @@ import lombok.val;
 import ms.gamerecommender.app.exceptions.InvalidGameIdException;
 import ms.gamerecommender.app.persistence.GameEntity;
 import ms.gamerecommender.app.persistence.UserGameEntity;
-import ms.gamerecommender.app.persistence.UserGameId;
 import ms.gamerecommender.app.persistence.UserProfileEntity;
 import ms.gamerecommender.app.persistence.repo.GameRepository;
 import ms.gamerecommender.app.persistence.repo.UserGameRepository;
@@ -19,11 +18,7 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Nullable;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 import static ms.gamerecommender.app.AppUtils.*;
 import static ms.gamerecommender.app.entities.AppConverters.*;
@@ -165,26 +160,5 @@ public class UserGameService {
 
     private UserProfileEntity getCurrentUserProfile() {
         return userProfileRepository.findById(getUserID()).orElseThrow();
-    }
-
-    private Set<UserGameEntity> updateUserGamesInfo(Set<UserGameEntity> userGameEntities, Set<UserGameEntity> newUserGameEntities) {
-        HashSet<UserGameEntity> updatedUserGames = new HashSet<>();
-
-        Map<UserGameId, UserGameEntity> oldGamesMap = userGameEntities.stream()
-                .collect(Collectors.toMap(UserGameEntity::getUserGameId, game -> game));
-
-        newUserGameEntities.forEach(newGame -> {
-            UserGameEntity updatedGame = oldGamesMap.get(newGame.getUserGameId());
-            if (updatedGame != null) {
-                updatedGame.setTimePlayed(newGame.getTimePlayed());
-            }
-            else {
-                updatedGame = newGame;
-            }
-
-            updatedUserGames.add(updatedGame);
-        });
-
-        return updatedUserGames;
     }
 }
