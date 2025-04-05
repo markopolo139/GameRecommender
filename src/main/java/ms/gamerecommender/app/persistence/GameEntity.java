@@ -33,14 +33,25 @@ public class GameEntity {
     double positiveReviewPercentage;
 
     @Nullable
-    @Column(name = "metacritic_score")
+    @Column(name = "metacritic_score", nullable = false)
     Double metacriticScore;
 
     @Nullable
-    @Column(name = "price")
+    @Column(name = "price", nullable = false)
     Double price;
 
     protected GameEntity() {}
+
+    @PrePersist
+    private void validate() {
+        if (metacriticScore == null) {
+            metacriticScore = 0.0;
+        }
+
+        if(price == null) {
+            price = 0.0;
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
