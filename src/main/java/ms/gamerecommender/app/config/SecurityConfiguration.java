@@ -34,13 +34,20 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/home", "/register").permitAll()
+                        .requestMatchers("/login", "/register").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
                 .userDetailsService(userDetailsService)
+                .formLogin(
+                        (formLogin) -> formLogin
+                            .usernameParameter("username")
+                            .passwordParameter("password")
+                            .loginPage("/login")
+                            .successForwardUrl("/home")
+                )
                 .logout((logout) -> logout
-                        .logoutSuccessUrl("/home")
+                        .logoutSuccessUrl("/login")
                         .permitAll()
                 );
 
