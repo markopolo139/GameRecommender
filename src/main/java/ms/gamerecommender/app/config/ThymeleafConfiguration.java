@@ -20,7 +20,7 @@ public class ThymeleafConfiguration {
 
         templateResolver.setPrefix("templates/");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setTemplateMode("HTML");
         templateResolver.setCharacterEncoding("UTF-8");
         templateResolver.setCacheable(false);
 

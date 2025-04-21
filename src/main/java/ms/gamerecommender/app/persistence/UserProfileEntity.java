@@ -18,7 +18,7 @@ import java.util.Set;
 @AllArgsConstructor
 public class UserProfileEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id", nullable = false)
     int id;
 

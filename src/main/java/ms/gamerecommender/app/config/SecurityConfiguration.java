@@ -34,7 +34,7 @@ public class SecurityConfiguration {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/login", "/register").permitAll()
+                        .requestMatchers("/login", "/register", "/check-password-match").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
@@ -44,7 +44,7 @@ public class SecurityConfiguration {
                             .usernameParameter("username")
                             .passwordParameter("password")
                             .loginPage("/login")
-                            .successForwardUrl("/home")
+                            .defaultSuccessUrl("/home", true)
                 )
                 .logout((logout) -> logout
                         .logoutSuccessUrl("/login")
