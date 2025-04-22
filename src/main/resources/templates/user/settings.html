@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{layout}">
+<head>
+    <title>User Settings</title>
+</head>
+<body>
+<div layout:fragment="content">
+    <div class="container mt-4" id="settings-content">
+        <h1>User Settings</h1>
+
+        <!-- Current User Display -->
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Account Information</h5>
+                <p class="card-text">
+                    Logged in as: <strong th:text="${#authentication.name}">username</strong>
+                </p>
+            </div>
+        </div>
+
+        <!-- Change Password Form -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                Change Password
+            </div>
+            <div class="card-body">
+                <form th:hx-post="@{/user/settings/change/password}"
+                      hx-target="#password-result">
+                    <div class="mb-3">
+                        <label class="form-label">Current Password</label>
+                        <input type="password" name="oldPassword" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">New Password</label>
+                        <input type="password" name="newPassword" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Password</button>
+                    <div id="password-result" class="mt-3"></div>
+                </form>
+            </div>
+        </div>
+
+        <!-- Change Username Form -->
+        <div class="card">
+            <div class="card-header bg-primary text-white">
+                Change Username
+            </div>
+            <div class="card-body">
+                <form th:hx-post="@{/user/settings/change/username}"
+                      hx-target="#username-result">
+                    <div class="mb-3">
+                        <label class="form-label">New Username</label>
+                        <input type="text" name="username" class="form-control" required
+                               th:value="${#authentication.name}">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Confirm Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Username</button>
+                    <div id="username-result" class="mt-3"></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 package ms.gamerecommender.web;
 
+import jakarta.servlet.http.HttpServletRequest;
 import ms.gamerecommender.app.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,30 @@ public class UserController {
             return "<div class='text-success'>Passwords match ✅</div>";
         } else {
             return "<div class='text-danger'>Passwords do not match ❌</div>";
+        }
+    }
+
+    @Controller
+    @RequestMapping(path = "/user/settings")
+    public class UserSettings {
+
+        @GetMapping
+        public String settings() {
+            return "user/settings";
+        }
+
+        @PostMapping("/change/password")
+        @ResponseBody
+        public String updatePassword(@RequestParam("oldPassword") String oldPassword, @RequestParam("newPassword") String newPassword) {
+            userService.updatePassword(oldPassword, newPassword);
+            return "<div class='text-success'>Passwords updated</div>";
+        }
+
+        @PostMapping("/change/username")
+        @ResponseBody
+        public String updateUsername(HttpServletRequest request, @RequestParam("username") String username, @RequestParam("password") String password) {
+            userService.updateUsername(username, password, request);
+            return "<div class='text-success'>Username updated</div>";
         }
     }
 }
