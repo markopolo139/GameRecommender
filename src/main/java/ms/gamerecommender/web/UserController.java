@@ -24,15 +24,19 @@ public class UserController {
             return "<div class='text-danger'>Passwords do not match, can't register with invalid passwords</div>";
         }
 
-        userService.createUser(username, password);
+        try {
+            userService.createUser(username, password);
+        }
+        catch (Exception e) {
+            return "<div class='text-danger'>%s</div>".formatted(e.getMessage());
+        }
+
         return "<div class='alert alert-success'>Registered successfully! You can now log in.</div>";
     }
 
     @GetMapping("/check-password-match")
     @ResponseBody
     public String checkPasswordMatch(@RequestParam("password") String password, @RequestParam("confirmPassword") String confirmPassword) {
-        System.out.println(password);
-        System.out.println(confirmPassword);
         if (password.equals(confirmPassword)) {
             return "<div class='text-success'>Passwords match ✅</div>";
         } else {
