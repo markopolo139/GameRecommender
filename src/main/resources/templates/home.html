@@ -1,17 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html  xmlns:th="http://www.thymeleaf.org"
+       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+       layout:decorate="~{layout}">
 <head>
-    <meta charset="UTF-8">
     <title>Login</title>
-    <script src="https://unpkg.com/htmx.org@2.0.4" integrity="sha384-HGfztofotfshcF7+8n44JQL2oJmowVChPTg48S+jvZoztPfvwD79OC/LTtG6dMp+" crossorigin="anonymous"></script>
 </head>
 <body>
-<h1>
-    THIS IS HOME
-</h1>
-
-<form method="post" th:action="@{/logout}">
-    <button type="submit">Logout</button>
-</form>
+<div layout:fragment="content">
+    <h1>THIS IS HOME</h1>
+    <form method="post" th:action="@{/logout}">
+        <button type="submit">Logout</button>
+    </form>
+</div>
 </body>
 </html>
