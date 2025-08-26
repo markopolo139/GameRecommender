@@ -4,18 +4,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 //TODO:
-// Create service for exchaning info with steamApi (RestClient [I think, to check])
-// ^ models for outputs and inputs from/to api and converters to Persistence entity
-// Reload user data, use created merge function in userGameService
-// Service to download data from steam In Insomnia necessary api calls, there is 237 thausend games, for tags need to combine categories and genres from appdetails endpoint and than filter by presence in all tags
-// IPlayerService getOwnedGames (get appId and playtime_forever, rest of info propably get from dataset, maybe check if there is info about left review)
-// Get App list, returns just app id with name of app, so to create dataset must be combined with get app info
-// In get app info there is info about total recommendations, price, metacritic, categories + genres, rating, number of achievments
-// Can get total negative, positive and total reviews from app review endpoint, app id is as path variable not query like above, can go through reviews via cursor to find if user reviewd (but probpably not useffull)
-// HTMX for frontend (docs and learn)
-// Think about saving model for NCF, just for learning
-// Fix: make business value classes into interfaces (this will be more flexible, but need to create impl classes for tests( or add price, metacrit score to Game Class (this will remove AppGame)
-// ^ Main goal is to remove GameEntity from this converter function convertToUserGameEntity
+// HTMX do all services, (user done, maybe in user add providing steam key)
+// Do this for some endpoint:
+//          SteamApiService steamApiService = context.getBean(SteamApiService.class);
+//          steamApiService.completeDatabase()
+// Add missing exceptions to exceptionsHandler (InternalAuthenticationServiceException)
+// Exception handling, Only errors for tags with htmx attributes, so if manually fetched it will not work, can be done like register endpoint, or just create specific responses in exceptionHandler, not generic one
+// Remember to include id=error-modal in exception handlers responses
+// (maybe) Saving model for NCF, just for learning, in RecommendService function getRecommendData(), check if there is file with it and than take it if present.
+// ^ but for it to be successfully that file needs to be updated when user assigns score to the game, can be done when user assigns new score, but then there should be check if game was scored before
+// ^ other easier option would be to retake table from database, but it will mean that it is the same as no saving at all
 @SpringBootApplication
 public class GameRecommenderApplication {
     public static void main(String[] args) {
